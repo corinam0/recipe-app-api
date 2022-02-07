@@ -38,7 +38,7 @@ class PublicUserApiTests(TestCase):
 
     def test_user_exists(self):
         """Test creating a user that already exists"""
-        payload = {'email': 'test@test.com', 'password':'teateatea'}
+        payload = {'email': 'test@test.com', 'password': 'teateatea'}
         create_user(**payload)
 
         res = self.client.post(CREATE_USER_URL, payload)
@@ -77,7 +77,7 @@ class PublicUserApiTests(TestCase):
 
 
     def test_create_token_no_user(self):
-        payload = {'email':'test@test.com', 'password':'teateatea'}
+        payload = {'email': 'test@test.com', 'password': 'teateatea'}
         res = self.client.post(TOKEN_URL, payload)
 
         self.assertNotIn('token', res.data)
@@ -114,8 +114,8 @@ class PrivateUserTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, {
-            'name':self.user.name,
-            'email':self.user.email,
+            'name': self.user.name,
+            'email': self.user.email,
         })
 
     def test_post_me_not_allowed(self):
