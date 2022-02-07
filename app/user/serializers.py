@@ -3,11 +3,14 @@ from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import serializers
 
-
+# The ModelSerializer performs validation FOR you and you can access the data using 'validated_data'
+# If you want to drop down to using Serializer classes instead, then you need to define the validation rules explicitly
 class UserSerializer(serializers.ModelSerializer):
     """Serializer for the user object"""
 
     class Meta:
+        # Instead of referring to User directly, you should reference the user model using django.contrib.auth.get_user_model().
+        # This method will return the currently active user model – the custom user model if one is specified, or User otherwise.
         model = get_user_model()
         fields = ('email', 'password', 'name')
         extra_kwargs = {'password':{'write_only': True, 'min_length': 5}}

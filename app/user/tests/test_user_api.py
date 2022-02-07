@@ -19,6 +19,7 @@ class PublicUserApiTests(TestCase):
     """Test the user API (public)"""
 
     def setUp(self):
+        # The 'APIClient()' mimics a client that sends an http request (browser, postman, etc.) so you can test it
         self.client = APIClient()
 
     def test_create_valid_user_success(self):
